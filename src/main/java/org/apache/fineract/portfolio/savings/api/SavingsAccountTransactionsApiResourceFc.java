@@ -123,8 +123,8 @@ public class SavingsAccountTransactionsApiResourceFc {
         this.context.authenticatedUser().validateHasReadPermission(SavingsApiConstants.SAVINGS_ACCOUNT_RESOURCE_NAME);
         SavingsAccountTransactionDataFc transactionData = this.savingsAccountReadPlatformService.retrieveSavingsTransactionFc(savingsAccountId,
                 transactionId, DepositAccountType.SAVINGS_DEPOSIT);
-        log.info("DATA RETRIEVED - ACCOUNT ID: "+ transactionData.getAccountId());
-        log.info("DATA RETRIEVED - CREATED ON TIME ZONE: "+ transactionData.getCreatedOnUtc());
+        log.debug("DATA RETRIEVED - ACCOUNT ID: "+ transactionData.getAccountId());
+        log.debug("DATA RETRIEVED - CREATED ON TIME ZONE: "+ transactionData.getCreatedOnUtc());
         final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
         if (settings.isTemplate()) {
             final Collection<PaymentTypeData> paymentTypeOptions = this.paymentTypeReadPlatformService.retrieveAllPaymentTypes();
