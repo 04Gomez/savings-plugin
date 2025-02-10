@@ -286,7 +286,7 @@ public final class SavingsAccountTransactionDataFc implements Serializable {
                 isManualTransaction, false);
     }
 
-    public static SavingsAccountTransactionDataFc interestPosting(final SavingsAccountData savingsAccount, final LocalDate date,
+    public static SavingsAccountTransactionDataFc interestPosting(final SavingsAccountDataFc savingsAccount, final LocalDate date,
             final Money amount, final boolean isManualTransaction) {
         final LocalDate submittedOnDate = DateUtils.getBusinessLocalDate();
         ZonedDateTime createdDate = ZonedDateTime.now(); 
@@ -297,7 +297,7 @@ public final class SavingsAccountTransactionDataFc implements Serializable {
         return createImport(transactionType, savingsAccount.getId(), date, amount.getAmount(), submittedOnDate, createdDate, isManualTransaction);
     }
 
-    public static SavingsAccountTransactionDataFc overdraftInterest(final SavingsAccountData savingsAccount, final LocalDate date,
+    public static SavingsAccountTransactionDataFc overdraftInterest(final SavingsAccountDataFc savingsAccount, final LocalDate date,
             final Money amount, final boolean isManualTransaction) {
         final LocalDate submittedOnDate = DateUtils.getBusinessLocalDate();
         ZonedDateTime createdDate = ZonedDateTime.now(); 
@@ -308,7 +308,7 @@ public final class SavingsAccountTransactionDataFc implements Serializable {
         return createImport(transactionType, savingsAccount.getId(), date, amount.getAmount(), submittedOnDate, createdDate, isManualTransaction);
     }
 
-    public static SavingsAccountTransactionDataFc withHoldTax(final SavingsAccountData savingsAccount, final LocalDate date,
+    public static SavingsAccountTransactionDataFc withHoldTax(final SavingsAccountDataFc savingsAccount, final LocalDate date,
             final Money amount, final Map<TaxComponentData, BigDecimal> taxDetails) {
         final LocalDate submittedOnDate = DateUtils.getBusinessLocalDate();
         ZonedDateTime createdDate = ZonedDateTime.now(); 
