@@ -98,7 +98,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.util.CollectionUtils;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class SavingsAccountReadPlatformServiceImplFc implements SavingsAccountReadPlatformService {
 
     private final PlatformSecurityContext context;
@@ -1555,7 +1557,7 @@ public class SavingsAccountReadPlatformServiceImplFc implements SavingsAccountRe
             DepositAccountType depositAccountType) {
 
         final String sql = "select " + this.transactionsMapper.schema() + " where sa.id = ? and sa.deposit_type_enum = ? and tr.id= ?";
-
+        log.info("sql " + sql);
         return this.jdbcTemplate.queryForObject(sql, this.transactionsMapperFc, // NOSONAR
                 new Object[] { savingsId, depositAccountType.getValue(), transactionId });
     }
@@ -1606,6 +1608,7 @@ public class SavingsAccountReadPlatformServiceImplFc implements SavingsAccountRe
         private static String buildSelect() {
             return "tr.id as transactionId, tr.transaction_type_enum as transactionType, "
                     + "tr.created_on_utc as createdDate, "
+                    + "tr.ref_no as reference, "
                     + "tr.transaction_date as transactionDate, tr.amount as transactionAmount, "
                     + "tr.release_id_of_hold_amount as releaseTransactionId, tr.reason_for_block as reasonForBlock, "
                     + "tr.submitted_on_date as submittedOnDate, au.username as submittedByUsername, nt.note as transactionNote, "
